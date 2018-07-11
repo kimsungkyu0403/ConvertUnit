@@ -9,14 +9,9 @@ from PyQt5.QtCore import QSize
 class ConvertUnit(QDialog):
     def __init__(self):
         super().__init__()
-        self.title = 'ConvertUnit'
-        self.left = 10
-        self.top = 10
-        self.width = 400
-        self.height = 200
 
-        self.setWindowTitle(self.title)
-        self.setGeometry(self.left, self.top, self.width, self.height)
+        self.setWindowTitle('ConvertUnit')
+        self.setGeometry(10, 10, 400, 200)
  
         self.horizontalGroupBox = QGroupBox("단위변환기")
         
@@ -30,28 +25,16 @@ class ConvertUnit(QDialog):
         layout.setColumnStretch(2, 4)
         
         for index in range(0, 4):
-            self.lbl1 = QLabel(self.label[index * 2])
-            self.widgets[index].append(self.lbl1)
+            self.widgets[index].append(QLabel(self.label[index * 2]))
+            self.widgets[index].append(QLineEdit())
+            self.widgets[index].append(QPushButton('변환하기', self))
+            self.widgets[index][2].clicked.connect(lambda arg1 = index: self.onClick(arg1))
+            self.widgets[index].append(QLabel(self.label[index * 2 + 1]))
+            self.widgets[index].append(QLineEdit())
+            self.widgets[index][4].setDisabled(True)
             
-            self.txt1= QLineEdit()
-            self.widgets[index].append(self.txt1)
-            
-            self.btn = QPushButton('변환하기', self)
-            self.btn.clicked.connect(lambda arg1 = index: self.onClick(arg1))
-            self.widgets[index].append(self.btn)
-            
-            self.lbl2 = QLabel(self.label[index * 2 + 1])
-            self.widgets[index].append(self.lbl2)
-            
-            self.txt2 = QLineEdit()
-            self.txt2.setDisabled(True)
-            self.widgets[index].append(self.txt2)
-            
-            layout.addWidget(self.widgets[index][0], index, 0)
-            layout.addWidget(self.widgets[index][1], index, 1)
-            layout.addWidget(self.widgets[index][2], index, 2)
-            layout.addWidget(self.widgets[index][3], index, 3)
-            layout.addWidget(self.widgets[index][4], index, 4)
+            for i in range(0, 5):
+                layout.addWidget(self.widgets[index][i], index, i)
 
         self.horizontalGroupBox.setLayout(layout)
         
