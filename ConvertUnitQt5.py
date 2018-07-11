@@ -1,4 +1,4 @@
-#!/usr/bin/emy python
+#!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
 import sys
