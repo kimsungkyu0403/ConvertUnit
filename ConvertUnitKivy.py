@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# coding: utf-8
+# -*- coding: utf-8 -*-
 
 import kivy
 from kivy.app import App
@@ -43,7 +43,8 @@ class ConvertUnit(GridLayout):
             return True
         except ValueError:
             return False
-    
+        
+        
     def OnClick(self, Btn, index):
         if not self.check(self.widgets[index][1].text):
             Popup(title = 'Error!!', content=Label(text='정수/실수 값을 입력해 주십시오.', font_name = 'HMFMPYUN'), size_hint=(None, None), size=(200, 100)).open()
